@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Current Weather</title>
+	<!-- bootstrap css file -->
+	<link href="css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+	
+	<meta name="Keywords" content="weather, world, temperature, clouds, sun, rain, snow, forecast, current">
+	
+	<!-- font awesome icon file -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+	
+	<link rel="icon" href="images/icon.png" type="image/png">
+	
+	<!-- custom stylesheet -->
+	<link href="css/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<main role="main" class="container mt-3">
+		<form method="POST">
+			<div class="row">
+				<div class="col-md-8 col-7">
+					<input class="form-control" type="text" name="city" id="city" placeholder="Enter City Name" required />
+				</div>
+				<div class="col-md-4 col-5">
+					<button class="btn btn-primary" type="submit">Search</button>
+					<button class="btn btn-primary" type="button" id="getlocate"><i class="fa fa-map-marker-alt"></i><span class="gps-txt"> Use GPS</span></button>
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<div class="col-md-9">
+				<p id="alert" class="alert-danger text-center text-capitalize font-weight-bold mt-3"></p>
+				<p id="error-alert" class="alert-danger text-center text-capitalize font-weight-bold mt-3"></p>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</main>
+	<main role="main" class="container mt-5">
+		<p class="text-center cityname"><span>City:</span>&nbsp;<span id="cityname"></span></p>
+		<div class="row">
+			<div class="col-md-4 conte text-center font-weight-bold">
+				<!-- <table class="table table-striped">
+					<thead>
+						<tr>
+							<th id="desc-txt">Description:</th>
+							<th><span id="desc" class="text-capitalize"></span><img id="w-icon" class="img-responsive" /></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Temperature:</td>
+							<td><span id="temp"></span><span>°C</span></td>
+						</tr>
+						<tr>
+							<td>Atmospheric pressure:</td>
+							<td><span id="pressure"></span><span> hPa</span></td>
+						</tr>
+						<tr>
+							<td>Humidity:</td>
+							<td><span id="humidity"></span><span>%</span></td>
+						</tr>
+						<tr>
+							<td>Wind Speed:</td>
+							<td><span id="wind-speed"></span><span> meter/sec</span></td>
+						</tr>
+						<tr>
+							<td>Wind Direction:</td>
+							<td><span id="wind-direction"></span><span> degrees</span></td>
+						</tr>
+						<tr>
+							<td>Clouds:</td>
+							<td><span id="clouds"></span><span>%</span></td>
+						</tr>
+						<tr>
+							<td>Sunrise:</td>
+							<td><span id="sunrise"></span></td>
+						</tr>
+						<tr>
+							<td>Sunset:</td>
+							<td><span id="sunset"></span></td>
+						</tr>
+					</tbody>
+				</table> -->
+				<p id="desc" class="text-capitalize main-temp"></p>
+				<img id="w-icon" class="main-weath" />
+				<p><span id="temp" class="main-temp"></span><span class="main-temp">°C</span></p>
+				<br>
+				<div class="row">
+					<div class="col-md-6">
+						<p><img src="images/humidity.png" class="img-responsive" /><span id="humidity"></span></p>
+					</div>
+					<div class="col-md-6">
+						<p><img src="images/wind.png" class="img-responsive" /> <span id="wind-speed"></span></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6"><p><img src="images/sunrise.png" class="img-responsive" /> <span id="sunrise"></span></p>
+					</div>
+					<div class="col-md-6">
+						<p><img src="images/sunset.png" class="img-responsive" /> <span id="sunset"></span></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 conte text-center font-weight-bold">
+				<!-- <table class="table table-striped">
+					<thead>
+						<tr>
+							<th id="desc-txt">Description:</th>
+							<th><span id="desc" class="text-capitalize"></span><img id="w-icon" class="img-responsive" /></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Temperature:</td>
+							<td><span id="temp"></span><span>°C</span></td>
+						</tr>
+						<tr>
+							<td>Atmospheric pressure:</td>
+							<td><span id="pressure"></span><span> hPa</span></td>
+						</tr>
+						<tr>
+							<td>Humidity:</td>
+							<td><span id="humidity"></span><span>%</span></td>
+						</tr>
+						<tr>
+							<td>Wind Speed:</td>
+							<td><span id="wind-speed"></span><span> meter/sec</span></td>
+						</tr>
+						<tr>
+							<td>Wind Direction:</td>
+							<td><span id="wind-direction"></span><span> degrees</span></td>
+						</tr>
+						<tr>
+							<td>Clouds:</td>
+							<td><span id="clouds"></span><span>%</span></td>
+						</tr>
+						<tr>
+							<td>Sunrise:</td>
+							<td><span id="sunrise"></span></td>
+						</tr>
+						<tr>
+							<td>Sunset:</td>
+							<td><span id="sunset"></span></td>
+						</tr>
+					</tbody>
+				</table> -->
+				<p id="desc" class="text-capitalize main-temp"></p>
+				<img id="w-icon" class="main-weath" />
+				<p><span id="temp" class="main-temp"></span><span class="main-temp">°C</span></p>
+				<br>
+				<div class="row">
+					<div class="col-md-6">
+						<p><img src="images/humidity.png" class="img-responsive" /><span id="humidity"></span></p>
+					</div>
+					<div class="col-md-6">
+						<p><img src="images/wind.png" class="img-responsive" /> <span id="wind-speed"></span></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6"><p><img src="images/sunrise.png" class="img-responsive" /> <span id="sunrise"></span></p>
+					</div>
+					<div class="col-md-6">
+						<p><img src="images/sunset.png" class="img-responsive" /> <span id="sunset"></span></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 conte text-center font-weight-bold">
+				<!-- <table class="table table-striped">
+					<thead>
+						<tr>
+							<th id="desc-txt">Description:</th>
+							<th><span id="desc" class="text-capitalize"></span><img id="w-icon" class="img-responsive" /></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Temperature:</td>
+							<td><span id="temp"></span><span>°C</span></td>
+						</tr>
+						<tr>
+							<td>Atmospheric pressure:</td>
+							<td><span id="pressure"></span><span> hPa</span></td>
+						</tr>
+						<tr>
+							<td>Humidity:</td>
+							<td><span id="humidity"></span><span>%</span></td>
+						</tr>
+						<tr>
+							<td>Wind Speed:</td>
+							<td><span id="wind-speed"></span><span> meter/sec</span></td>
+						</tr>
+						<tr>
+							<td>Wind Direction:</td>
+							<td><span id="wind-direction"></span><span> degrees</span></td>
+						</tr>
+						<tr>
+							<td>Clouds:</td>
+							<td><span id="clouds"></span><span>%</span></td>
+						</tr>
+						<tr>
+							<td>Sunrise:</td>
+							<td><span id="sunrise"></span></td>
+						</tr>
+						<tr>
+							<td>Sunset:</td>
+							<td><span id="sunset"></span></td>
+						</tr>
+					</tbody>
+				</table> -->
+				<p id="desc" class="text-capitalize main-temp"></p>
+				<img id="w-icon" class="main-weath" />
+				<p><span id="temp" class="main-temp"></span><span class="main-temp">°C</span></p>
+				<br>
+				<div class="row">
+					<div class="col-md-6">
+						<p><img src="images/humidity.png" class="img-responsive" /><span id="humidity"></span></p>
+					</div>
+					<div class="col-md-6">
+						<p><img src="images/wind.png" class="img-responsive" /> <span id="wind-speed"></span></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6"><p><img src="images/sunrise.png" class="img-responsive" /> <span id="sunrise"></span></p>
+					</div>
+					<div class="col-md-6">
+						<p><img src="images/sunset.png" class="img-responsive" /> <span id="sunset"></span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<footer class="footer">
+		<div class="container">
+			<div class="text-center text-capitalize"><a href="https://www.linkedin.com/in/mohit-kumar-66b920117" class="footer-txt">Made with <i class="fas fa-heart"></i> by Mohit Kumar</a></div>
+		</div>
+	</footer>
+</body>
+	<script src="js/jquery.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<!-- script to get details of weather -->
+	<script>
+		$(document).ready(function() {
+			$('form').submit(function(event){
+				$('#name + .throw_error').empty(); //Clear the messages first
+        		$('#success').empty();
+
+				var city = $("#city").val();
+				
+				if(city == "")
+				{
+					$("#alert").html("Please enter City!");
+				}
+				else
+				{
+					var datastring = 'city=' + city;
+
+					$.ajax({
+						type: 'POST',
+						url: 'weatherforecast.php',
+						data: datastring,
+						cache: false,
+						success: function(data)
+						{
+							var parsed = JSON.parse(data);
+							$("#desc").html(parsed['weather'][0]['description']);
+							var iconname = parsed['weather'][0]['icon'];
+							var url = "http://openweathermap.org/img/w/" + iconname + ".png";
+							$("#w-icon").attr("src", url);
+							$("#temp").html(parseInt(parsed['main']['temp'] - 273.15));
+							$("#pressure").html(parsed['main']['pressure']);
+							$("#humidity").html(parsed['main']['humidity']);
+							$("#wind-speed").html(parsed['wind']['speed']);
+							$("#cityname").html(parsed['name']);
+							$("#wind-direction").html(parsed['wind']['deg']);
+							$("#clouds").html(parsed['clouds']['all']);
+							//getdate and parse it from unix to timestamp
+							var date = new Date(parsed['sys']['sunrise']*1000);
+							var hours = date.getHours();
+							// Minutes part from the timestamp
+							var minutes = "0" + date.getMinutes();
+							//formatted time
+							var formattedtime = hours + ':' + minutes.substr(-2);
+							$("#sunrise").html(formattedtime);
+							//getdate and parse it from unix to timestamp
+							var dateset = new Date(parsed['sys']['sunset']*1000);
+							var hoursset = dateset.getHours();
+							// Minutes part from the timestamp
+							var minutesset = "0" + dateset.getMinutes();
+							//formatted time
+							var formattedtimeset = hoursset + ':' + minutesset.substr(-2);
+							$("#sunset").html(formattedtimeset);
+						}
+					});
+				}
+				event.preventDefault();
+			});
+		});
+	</script>
+	<!-- script to get current location of a user -->
+	<script>
+		$(document).ready(function(){
+			$("#getlocate").click(function(){
+				//var x = document.getElementById("error-alert");
+					if (navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition(showPosition);
+					} else { 
+						$("error-alert").html("Geolocation is not supported by this browser.");
+					}
+			function showPosition(position) {
+				var datacoord =  "latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude;
+				console.log(datacoord)
+				$.ajax({
+						type: 'POST',
+						url: 'weatherLatLong.php',
+						data: datacoord,
+						cache: false,
+						success: function(data)
+						{
+							var parsed = JSON.parse(data);
+							$("#desc").html(parsed['weather'][0]['description']);
+							var iconname = parsed['weather'][0]['icon'];
+							var url = "http://openweathermap.org/img/w/" + iconname + ".png";
+							$("#w-icon").attr("src", url);
+							$("#temp").html(parseInt(parsed['main']['temp'] - 273.15));
+							$("#pressure").html(parsed['main']['pressure']);
+							$("#humidity").html(parsed['main']['humidity']);
+							$("#wind-speed").html(parsed['wind']['speed']);
+							$("#cityname").html(parsed['name']);
+							$("#wind-direction").html(parsed['wind']['deg']);
+							$("#clouds").html(parsed['clouds']['all']);
+							//getdate and parse it from unix to timestamp
+							var date = new Date(parsed['sys']['sunrise']*1000);
+							var hours = date.getHours();
+							// Minutes part from the timestamp
+							var minutes = "0" + date.getMinutes();
+							//formatted time
+							var formattedtime = hours + ':' + minutes.substr(-2);
+							$("#sunrise").html(formattedtime);
+							//getdate and parse it from unix to timestamp
+							var dateset = new Date(parsed['sys']['sunset']*1000);
+							var hoursset = dateset.getHours();
+							// Minutes part from the timestamp
+							var minutesset = "0" + dateset.getMinutes();
+							//formatted time
+							var formattedtimeset = hoursset + ':' + minutesset.substr(-2);
+							$("#sunset").html(formattedtimeset);
+						}
+					});
+			}
+			});
+			});
+	</script>
+</html>
