@@ -9,7 +9,7 @@ if($city == "")
 else
 {
 	$baseurl = 'http://api.openweathermap.org/data/2.5/forecast';
-	$finalurl = $baseurl . "?q=" . $city . "&APPID=5ab905a423f6d45914490a574a80284d";
+	$finalurl = $baseurl . "?q=" . $city . "&APPID=Your-API-Key-Here";
 
 
 	$response = json_decode(file_get_contents($finalurl), true);
