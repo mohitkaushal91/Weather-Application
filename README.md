@@ -1,6 +1,6 @@
 # Weather-Application
 
-This is web based application to find weather.
+This is Responsive Web based Application to find Weather.
 It let you find weather using your current location along with any specific location by just entering the name of location.
 This application provides following details:
 1. Description
